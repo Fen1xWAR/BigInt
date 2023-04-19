@@ -32,7 +32,7 @@ class TBuffer{ // методы класса
 class TLNum {
     constructor(S) {
         S=S || {};
-        this._digits=S['digits'] || [0,0,0,0,0,0,0,0,0,0,0,0,0]; //[7,5,0,5,4,0,0,0,0,0]
+        this._digits=S['digits'] || [1,2,3,4,0,0,0,0,0,0,0,0,0]; //
         this.maxlen=S['digits'] ? S['digits'].length : DIGITS_ARRAY_MAXLEN; // "?" оператор значения if,если в конструкторе S[]
         this.negative=S['n'] || false;
         this.layout=S['layout'] || null;
@@ -50,9 +50,28 @@ class TLNum {
     //console.assert(this.current>=0,"Current digit reference is negative")
     // return this.current();
 
-    digits(d){
-        if(d==undefined){return(this._digits)}
-        this._digits.fill(d);return this;
+    digits(rand){
+        if(rand == false){return(this._digits)}
+        else{
+            let rand_digits_length = getRandomInt(13)+4
+            if  ( rand_digits_length > this.maxlen){
+                rand_digits_length= this.maxlen
+            }
+            let rand_digits = new Array(rand_digits_length)
+            rand_digits.fill(0)
+
+            for (let i = 0; i<rand_digits_length-1; i++){
+
+                rand_digits[i]=(getRandomInt(9))
+            }
+
+            this._digits = rand_digits
+        }
+        let tmp = DIGITS_ARRAY_MAXLEN - this._digits.length;
+         for (let i = 0;i< tmp; i++ ){
+                 this._digits.push(0)
+         }
+        return (this._digits);
     }
     lsd(n){
         if (n!=undefined){this.lsd_num=n;return this}
