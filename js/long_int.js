@@ -103,6 +103,16 @@ class TLNum {
     setRand(){
         return "случайный"
     }
+    prod(s) {
+        let bf = new TBuffer(this.first(), s.first())
+        while (bf.notEmpty() && (!this.current_lsd() || !s.current_lsd())) {
+            this.current(bf.rem())
+            this.next();
+            s.next()
+            this.current(bf.pushProd(this.current(), s.current()))
+            this.find_lsd();
+        }
+    }
     add(s){
         let bf=new TBuffer(this.first(),s.first())
         while (bf.notEmpty()&& (!this.current_lsd() || !s.current_lsd()) ) {
