@@ -24,6 +24,16 @@ function LNNumsSum(){
 	generated_html=`<span id="${n_id}" class="ln_container">Сумма [${first._digits.join(", ")}]</span>`;
 	$("#num_list").append($(generated_html));
 }
+function LNNumsProd(){
+	let first = LNList[0]
+	for ( let i = 1;i<LNList.length;i++) {
+		first.prod(LNList[i])
+	}
+	let n_id=`span_id_${LNList.length}`;
+	let generated_html
+	generated_html=`<span id="${n_id}" class="ln_container">Произведение [${first._digits.join(", ")}]</span>`;
+	$("#num_list").append($(generated_html));
+}
 function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
 }
@@ -53,4 +63,5 @@ $(document).ready(function(){
 		$("#rndLInt").on('click',() => {push_long_list()})
 		$("#newLInt").on('click',() => {push_long_list(false)})
 	    $("#addLInt").on('click',() => {LNNumsSum()})
+		$("#mulLInt").on('click',() => {LNNumsProd()})
 });
